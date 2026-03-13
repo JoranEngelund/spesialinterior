@@ -67,7 +67,7 @@ const projects = [
     image: prosjektInnredning,
     category: "Prosjekt Innredning",
     title: "Båtmonter",
-    size: "large",
+    size: "medium",
     position: "center center",
   },
   {
