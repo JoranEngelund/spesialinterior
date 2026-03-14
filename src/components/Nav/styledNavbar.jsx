@@ -4,12 +4,10 @@ export const Header = styled.header`
   position: sticky;
   top: 0;
   z-index: 1200;
-  padding: 1rem 0 0;
   pointer-events: none;
 `;
 
 export const NavWrap = styled.div`
-  width: min(1320px, calc(100% - 2rem));
   margin: 0 auto;
   pointer-events: auto;
 `;
@@ -20,24 +18,16 @@ export const NavShell = styled.div`
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 1.25rem;
-  min-height: ${({ $compact }) => ($compact ? "64px" : "78px")};
-  padding: ${({ $compact }) =>
-    $compact
-      ? "0.55rem 0.75rem 0.55rem 0.9rem"
-      : "0.75rem 0.9rem 0.75rem 1rem"};
-  border-radius: ${({ $compact }) => ($compact ? "20px" : "24px")};
+  min-height: 78px;
+  padding: 0.75rem 0.9rem 0.75rem 1rem;
   transition:
-    min-height 0.28s ease,
-    padding 0.28s ease,
-    border-radius 0.28s ease,
-    background 0.28s ease,
-    border-color 0.28s ease,
-    box-shadow 0.28s ease,
-    backdrop-filter 0.28s ease,
-    transform 0.28s ease;
+    background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    backdrop-filter 0.25s ease;
 
-  ${({ $scrolled, $compact }) =>
-    $scrolled || $compact
+  ${({ $scrolled }) =>
+    $scrolled
       ? css`
           background: rgba(255, 255, 255, 0.62);
           border: 1px solid rgba(255, 255, 255, 0.84);
@@ -62,12 +52,9 @@ export const NavShell = styled.div`
 
   @media (max-width: 992px) {
     grid-template-columns: auto auto;
-    min-height: ${({ $compact }) => ($compact ? "58px" : "70px")};
-    padding: ${({ $compact }) =>
-      $compact
-        ? "0.45rem 0.65rem 0.45rem 0.8rem"
-        : "0.65rem 0.75rem 0.65rem 0.9rem"};
-    border-radius: ${({ $compact }) => ($compact ? "18px" : "22px")};
+    min-height: 70px;
+    padding: 0.65rem 0.75rem 0.65rem 0.9rem;
+    border-radius: 22px;
   }
 `;
 
@@ -79,13 +66,12 @@ export const Brand = styled.a`
 `;
 
 export const BrandLogo = styled.img`
-  height: ${({ $compact }) => ($compact ? "32px" : "38px")};
+  height: 38px;
   width: auto;
   object-fit: contain;
-  transition: height 0.28s ease;
 
   @media (max-width: 576px) {
-    height: ${({ $compact }) => ($compact ? "29px" : "34px")};
+    height: 34px;
   }
 `;
 
@@ -95,16 +81,6 @@ export const DesktopNav = styled.nav`
   align-items: center;
   gap: 0.25rem;
   padding: 0.25rem;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.28);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.5) inset,
-    0 0 24px rgba(213, 31, 38, 0.035);
-  transition:
-    padding 0.28s ease,
-    transform 0.28s ease,
-    background 0.28s ease;
 
   @media (max-width: 992px) {
     display: none;

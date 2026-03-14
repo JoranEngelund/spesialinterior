@@ -5,51 +5,61 @@ import Logo from "../../assets/spid-logo.jpg";
 
 const projectLinks = [
   {
-    label: "Kjøkken",
-    description: "Skreddersydde kjøkkenløsninger med høy finish.",
-    href: "#prosjekter-kjokken",
+    label: "Prosjekt Fasade",
+    description: "Bjørvika",
+    href: "#prosjekt-fasade-bjorvika",
   },
   {
-    label: "Garderobe",
-    description: "Plassbygde garderober tilpasset rom og behov.",
-    href: "#prosjekter-garderobe",
+    label: "Prosjekt Dører",
+    description: "Trikkestallen Torshov nye dører",
+    href: "#prosjekt-dorer-trikkestallen-torshov",
   },
   {
-    label: "Oppbevaring",
-    description: "Smarte løsninger for orden, flyt og funksjon.",
-    href: "#prosjekter-oppbevaring",
+    label: "Prosjekt Vinduer",
+    description: "Varesentralen Øvre Slottsgate",
+    href: "#prosjekt-vinduer-varesentralen",
   },
   {
-    label: "Spesialinnredning",
-    description: "Unike løsninger bygget rundt helheten i hjemmet.",
-    href: "#prosjekter-spesialinnredning",
+    label: "Prosjekt Spilekledning",
+    description: "Bjørvika Bygg B",
+    href: "#prosjekt-spilekledning-bjorvika-bygg-b",
+  },
+  {
+    label: "Prosjekt Bro",
+    description: "Bolig utbygging Bryn",
+    href: "#prosjekt-bro-bryn",
+  },
+  {
+    label: "Prosjekt Innredning",
+    description: "Båtmonter",
+    href: "#prosjekt-innredning-batmonter",
+  },
+  {
+    label: "Prosjekt Fasade dekor",
+    description: "Fra gammelt til nytt",
+    href: "#prosjekt-fasade-dekor",
+  },
+  {
+    label: "Prosjekt Vinmonter",
+    description: "Innredning",
+    href: "#prosjekt-vinmonter",
+  },
+  {
+    label: "Prosjekt Tannlegekontor",
+    description: "Innredning",
+    href: "#prosjekt-tannlegekontor",
   },
 ];
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isCompact, setIsCompact] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [projectsOpen, setProjectsOpen] = useState(false);
   const dropdownRef = useRef(null);
-  const lastScrollY = useRef(0);
 
   useEffect(() => {
     const onScroll = () => {
-      const currentY = window.scrollY;
-      const scrollingDown = currentY > lastScrollY.current;
-
-      setIsScrolled(currentY > 16);
-
-      if (currentY < 24) {
-        setIsCompact(false);
-      } else if (scrollingDown && currentY > 80) {
-        setIsCompact(true);
-      } else if (!scrollingDown) {
-        setIsCompact(false);
-      }
-
-      lastScrollY.current = currentY;
+      setIsScrolled(window.scrollY > 16);
     };
 
     onScroll();
@@ -94,9 +104,9 @@ export default function Navbar() {
   return (
     <s.Header>
       <s.NavWrap>
-        <s.NavShell $scrolled={isScrolled} $compact={isCompact}>
+        <s.NavShell $scrolled={isScrolled}>
           <s.Brand href="/" aria-label="Spesialinteriør og Design AS">
-            <s.BrandLogo src={Logo} alt="SPID logo" $compact={isCompact} />
+            <s.BrandLogo src={Logo} alt="SPID logo" />
           </s.Brand>
 
           <s.DesktopNav>

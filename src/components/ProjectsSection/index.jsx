@@ -81,21 +81,14 @@ const projects = [
     image: prosjektVinmonter,
     category: "Prosjekt Vinmonter",
     title: "Innredning",
-    size: "small",
+    size: "large",
     position: "center center",
   },
   {
     image: prosjektTannlegekontor,
     category: "Prosjekt Tannlegekontor",
     title: "Innredning",
-    size: "medium",
-    position: "center center",
-  },
-  {
-    image: prosjektFasade,
-    category: "Prosjekt Fasade",
-    title: "Bjørvika",
-    size: "small",
+    size: "large",
     position: "center center",
   },
 ];

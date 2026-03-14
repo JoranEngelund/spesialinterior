@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const FooterWrapper = styled.footer`
   position: relative;
-  padding: 2rem 0 2.5rem;
   background:
     linear-gradient(180deg, #efe9e1 0%, #e9e2d8 100%),
     radial-gradient(
@@ -13,12 +12,10 @@ export const FooterWrapper = styled.footer`
 `;
 
 export const Container = styled.div`
-  width: min(1320px, calc(100% - 2rem));
   margin: 0 auto;
 `;
 
 export const FooterCard = styled.div`
-  border-radius: 32px;
   padding: 1.5rem;
   background: rgba(255, 255, 255, 0.58);
   border: 1px solid rgba(255, 255, 255, 0.82);
