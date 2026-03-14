@@ -5,47 +5,47 @@ import Logo from "../../assets/spid-logo.jpg";
 
 const projectLinks = [
   {
-    label: "Prosjekt Fasade",
+    label: "Fasade",
     description: "Bjørvika",
     href: "#prosjekt-fasade-bjorvika",
   },
   {
-    label: "Prosjekt Dører",
+    label: "Dører",
     description: "Trikkestallen Torshov nye dører",
     href: "#prosjekt-dorer-trikkestallen-torshov",
   },
   {
-    label: "Prosjekt Vinduer",
+    label: "Vinduer",
     description: "Varesentralen Øvre Slottsgate",
     href: "#prosjekt-vinduer-varesentralen",
   },
   {
-    label: "Prosjekt Spilekledning",
+    label: "Spilekledning",
     description: "Bjørvika Bygg B",
     href: "#prosjekt-spilekledning-bjorvika-bygg-b",
   },
   {
-    label: "Prosjekt Bro",
+    label: "Bro",
     description: "Bolig utbygging Bryn",
     href: "#prosjekt-bro-bryn",
   },
   {
-    label: "Prosjekt Innredning",
+    label: "Innredning",
     description: "Båtmonter",
     href: "#prosjekt-innredning-batmonter",
   },
   {
-    label: "Prosjekt Fasade dekor",
+    label: "Fasade dekor",
     description: "Fra gammelt til nytt",
     href: "#prosjekt-fasade-dekor",
   },
   {
-    label: "Prosjekt Vinmonter",
+    label: "Vinmonter",
     description: "Innredning",
     href: "#prosjekt-vinmonter",
   },
   {
-    label: "Prosjekt Tannlegekontor",
+    label: "Tannlegekontor",
     description: "Innredning",
     href: "#prosjekt-tannlegekontor",
   },
