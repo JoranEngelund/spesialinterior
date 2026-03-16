@@ -44,7 +44,7 @@ export default function HeroSection() {
             >
               Skreddersydd interiør
               <br />
-              med <s.Accent>premium utførelse</s.Accent>
+              med over <s.Accent>40 års erfaring</s.Accent>
             </s.Title>
 
             <s.Description

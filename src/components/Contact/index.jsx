@@ -54,15 +54,38 @@ export default function ContactSection() {
           viewport={{ once: true, amount: 0.2 }}
           custom={0.04}
         >
-          <s.Kicker>Kontakt oss</s.Kicker>
+          <s.Kicker
+            as={motion.p}
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            custom={0.1}
+          >
+            Kontakt oss
+          </s.Kicker>
 
-          <s.Title>
+          <s.Title
+            as={motion.h2}
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            custom={0.1}
+          >
             Har du et prosjekt
             <br />
             vi kan <s.Accent>hjelpe med?</s.Accent>
           </s.Title>
 
-          <s.Text>
+          <s.Text
+            as={motion.p}
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            custom={0.1}
+          >
             Fortell oss litt om prosjektet ditt, så tar vi kontakt for en
             uforpliktende prat om muligheter, løsning og videre prosess.
           </s.Text>

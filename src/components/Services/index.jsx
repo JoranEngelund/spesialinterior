@@ -151,15 +151,38 @@ export default function ServicesSection() {
             viewport={{ once: true, amount: 0.2 }}
             custom={0.08}
           >
-            <s.SpecialtiesKicker>Spesialiteter</s.SpecialtiesKicker>
+            <s.SpecialtiesKicker
+              as={motion.p}
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              custom={0.1}
+            >
+              Spesialiteter
+            </s.SpecialtiesKicker>
 
-            <s.SpecialtiesTitle>
+            <s.SpecialtiesTitle
+              as={motion.h2}
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              custom={0.1}
+            >
               Erfaring der kravene
               <br />
               er <s.Accent>høyere</s.Accent>
             </s.SpecialtiesTitle>
 
-            <s.SpecialtiesText>
+            <s.SpecialtiesText
+              as={motion.p}
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              custom={0.1}
+            >
               Vi har særlig erfaring med prosjekter som krever presisjon,
               fagkompetanse og løsninger tilpasset mer komplekse behov.
             </s.SpecialtiesText>
