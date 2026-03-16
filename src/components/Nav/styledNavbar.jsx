@@ -87,7 +87,7 @@ export const NavbarWrapper = styled(Navbar)`
 `;
 
 export const BrandLogo = styled.img`
-  height: 36px;
+  height: 50px;
   width: auto;
   object-fit: contain;
 

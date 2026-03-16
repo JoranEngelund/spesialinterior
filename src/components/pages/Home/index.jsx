@@ -1,3 +1,4 @@
+import ContactSection from "../../Contact";
 import Footer from "../../Footer";
 import Hero from "../../Hero";
 import Navbar from "../../Nav";
@@ -11,6 +12,7 @@ export default function Home() {
       <Hero />
       <ProjectsSection />
       <ServicesSection />
+      <ContactSection />
       <Footer />
     </>
   );
