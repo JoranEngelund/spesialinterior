@@ -7,7 +7,7 @@ import prosjektDorer from "../../assets/dører.jpg";
 import prosjektSpilekledning from "../../assets/spilekledning.jpg";
 import prosjektBro from "../../assets/bro.jpg";
 import prosjektInnredning from "../../assets/innredning.jpg";
-import prosjektFasadeDekor from "../../assets/fasade.jpg";
+import prosjektFasadeDekor from "../../assets/fasadedekor.jpg";
 import prosjektVinmonter from "../../assets/vinmonter.jpg";
 import prosjektTannlegekontor from "../../assets/tannlegekontor.jpg";
 import prosjektFasade from "../../assets/fasade.jpg";
@@ -81,7 +81,7 @@ const projects = [
     id: "prosjekt-vinmonter",
     image: prosjektVinmonter,
     category: "Vinmonter",
-    title: "Innredning",
+    title: "Vinmonter",
     position: "center center",
   },
   {
