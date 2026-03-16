@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Section = styled.section`
   position: relative;
   overflow: hidden;
-  padding: 2.5rem 0 5.5rem;
+  padding: 8.5rem 0 5.5rem;
   background:
     radial-gradient(
       circle at top left,
@@ -18,7 +18,7 @@ export const Section = styled.section`
     linear-gradient(180deg, #faf8f5 0%, #f2eee8 100%);
 
   @media (max-width: 992px) {
-    padding: 1.8rem 0 4.25rem;
+    padding: 7.5rem 0 4.25rem;
   }
 `;
 

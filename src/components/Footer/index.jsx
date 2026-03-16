@@ -1,5 +1,5 @@
 import { Mail, MapPin, Phone, ArrowUpRight } from "lucide-react";
-import Logo from "../../assets/spid-logo.jpg";
+import Logo from "../../assets/spid_logo_nav.svg";
 import * as s from "./styledFooter";
 
 export default function Footer() {

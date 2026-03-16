@@ -2,13 +2,12 @@ import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import * as s from "./styledProjects";
 
-// Juster filnavnene under så de matcher nøyaktig det dere har i assets
 import prosjektVinduer from "../../assets/vinduer.jpg";
 import prosjektDorer from "../../assets/dører.jpg";
 import prosjektSpilekledning from "../../assets/spilekledning.jpg";
 import prosjektBro from "../../assets/bro.jpg";
 import prosjektInnredning from "../../assets/innredning.jpg";
-import prosjektFasadeDekor from "../../assets/fasadedekor.jpg";
+import prosjektFasadeDekor from "../../assets/fasade.jpg";
 import prosjektVinmonter from "../../assets/vinmonter.jpg";
 import prosjektTannlegekontor from "../../assets/tannlegekontor.jpg";
 import prosjektFasade from "../../assets/fasade.jpg";
@@ -26,69 +25,71 @@ const fadeUp = {
   }),
 };
 
-const projects = [
+const featuredProjects = [
   {
+    id: "prosjekt-fasade-bjorvika",
     image: prosjektFasade,
     category: "Fasade",
     title: "Bjørvika",
-    size: "large",
     position: "center center",
   },
   {
+    id: "prosjekt-dorer-trikkestallen-torshov",
     image: prosjektDorer,
     category: "Dører",
     title: "Trikkestallen Torshov nye dører",
-    size: "large",
     position: "center center",
   },
+];
+
+const projects = [
   {
+    id: "prosjekt-vinduer-varesentralen",
     image: prosjektVinduer,
     category: "Vinduer",
     title: "Varesentralen Øvre Slottsgate",
-    size: "medium",
     position: "center center",
   },
-
   {
+    id: "prosjekt-spilekledning-bjorvika-bygg-b",
     image: prosjektSpilekledning,
     category: "Spilekledning",
     title: "Bjørvika Bygg B",
-    size: "medium",
     position: "center center",
   },
   {
+    id: "prosjekt-bro-bryn",
     image: prosjektBro,
     category: "Bro",
     title: "Bolig utbygging Bryn",
-    size: "small",
     position: "center center",
   },
   {
+    id: "prosjekt-innredning-batmonter",
     image: prosjektInnredning,
     category: "Innredning",
     title: "Båtmonter",
-    size: "medium",
     position: "center center",
   },
   {
+    id: "prosjekt-fasade-dekor",
     image: prosjektFasadeDekor,
     category: "Fasade dekor",
     title: "Fra gammelt til nytt",
-    size: "large",
     position: "center center",
   },
   {
+    id: "prosjekt-vinmonter",
     image: prosjektVinmonter,
     category: "Vinmonter",
     title: "Innredning",
-    size: "large",
     position: "center center",
   },
   {
+    id: "prosjekt-tannlegekontor",
     image: prosjektTannlegekontor,
     category: "Tannlegekontor",
     title: "Innredning",
-    size: "large",
     position: "center center",
   },
 ];
@@ -135,17 +136,17 @@ export default function ProjectsSection() {
           </s.Text>
         </s.Intro>
 
-        <s.Grid>
-          {projects.map((project, index) => (
-            <s.ProjectCard
+        <s.FeaturedGrid>
+          {featuredProjects.map((project, index) => (
+            <s.FeaturedCard
+              id={project.id}
               as={motion.article}
-              key={`${project.category}-${project.title}-${index}`}
-              $size={project.size}
+              key={project.id}
               variants={fadeUp}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.15 }}
-              custom={0.04 + index * 0.04}
+              custom={0.04 + index * 0.06}
             >
               <s.ImageWrap>
                 <s.Image
@@ -157,10 +158,38 @@ export default function ProjectsSection() {
 
                 <s.CardTop>
                   <s.CategoryPill>{project.category}</s.CategoryPill>
+                </s.CardTop>
 
-                  <s.CardArrow>
-                    <ArrowUpRight size={16} />
-                  </s.CardArrow>
+                <s.CardBottom>
+                  <s.ProjectTitle>{project.title}</s.ProjectTitle>
+                </s.CardBottom>
+              </s.ImageWrap>
+            </s.FeaturedCard>
+          ))}
+        </s.FeaturedGrid>
+
+        <s.Grid>
+          {projects.map((project, index) => (
+            <s.ProjectCard
+              id={project.id}
+              as={motion.article}
+              key={project.id}
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.15 }}
+              custom={0.08 + index * 0.04}
+            >
+              <s.ImageWrap>
+                <s.Image
+                  src={project.image}
+                  alt={project.title}
+                  $position={project.position}
+                />
+                <s.ImageOverlay />
+
+                <s.CardTop>
+                  <s.CategoryPill>{project.category}</s.CategoryPill>
                 </s.CardTop>
 
                 <s.CardBottom>

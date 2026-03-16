@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight, PhoneCall } from "lucide-react";
-import bannerImage from "../../assets/banner_hovedbilde4.jpg";
+import bannerImage from "../../assets/fasasebanner.jpg";
 import * as s from "./styledHero";
 
 const fadeUp = {
@@ -113,15 +113,6 @@ export default function HeroSection() {
             <s.ImageShell>
               <s.Image src={bannerImage} alt="Spesialinteriør prosjekt" />
               <s.ImageOverlay />
-
-              <s.TopPill
-                as={motion.div}
-                initial={{ opacity: 0, y: -14 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.65, delay: 0.5 }}
-              >
-                Moderne løsninger med gjennomført finish
-              </s.TopPill>
 
               <s.BottomPanel
                 as={motion.div}

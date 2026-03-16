@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 export const Section = styled.section`
   position: relative;
@@ -69,13 +69,32 @@ export const Text = styled.p`
   text-align: center;
 `;
 
+export const FeaturedGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+
+  @media (max-width: 820px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+export const FeaturedCard = styled.article`
+  min-height: 400px;
+
+  @media (max-width: 820px) {
+    min-height: 300px;
+  }
+`;
+
 export const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
 
   @media (max-width: 1100px) {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   @media (max-width: 700px) {
@@ -83,53 +102,16 @@ export const Grid = styled.div`
   }
 `;
 
-const sizeStyles = {
-  large: css`
-    grid-column: span 6;
-    min-height: 400px;
-
-    @media (max-width: 1100px) {
-      grid-column: span 6;
-      min-height: 340px;
-    }
-
-    @media (max-width: 700px) {
-      grid-column: span 1;
-      min-height: 300px;
-    }
-  `,
-  medium: css`
-    grid-column: span 4;
-    min-height: 320px;
-
-    @media (max-width: 1100px) {
-      grid-column: span 3;
-      min-height: 280px;
-    }
-
-    @media (max-width: 700px) {
-      grid-column: span 1;
-      min-height: 280px;
-    }
-  `,
-  small: css`
-    grid-column: span 4;
-    min-height: 260px;
-
-    @media (max-width: 1100px) {
-      grid-column: span 3;
-      min-height: 240px;
-    }
-
-    @media (max-width: 700px) {
-      grid-column: span 1;
-      min-height: 260px;
-    }
-  `,
-};
-
 export const ProjectCard = styled.article`
-  ${({ $size = "medium" }) => sizeStyles[$size]}
+  min-height: 280px;
+
+  @media (max-width: 1100px) {
+    min-height: 260px;
+  }
+
+  @media (max-width: 700px) {
+    min-height: 260px;
+  }
 `;
 
 export const ImageWrap = styled.div`

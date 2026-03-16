@@ -1,218 +1,126 @@
-import { useEffect, useRef, useState } from "react";
-import { ArrowRight, ChevronDown, Menu, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Container, Navbar as BsNavbar, NavDropdown } from "react-bootstrap";
+import { ArrowRight } from "lucide-react";
 import * as s from "./styledNavbar";
-import Logo from "../../assets/spid-logo.jpg";
+import Logo from "../../assets/spid_logo_nav.svg";
 
 const projectLinks = [
   {
     label: "Fasade",
     description: "Bjørvika",
-    href: "#prosjekt-fasade-bjorvika",
+    href: "https://example.com/prosjekt/fasade-bjorvika",
   },
   {
     label: "Dører",
     description: "Trikkestallen Torshov nye dører",
-    href: "#prosjekt-dorer-trikkestallen-torshov",
+    href: "https://example.com/prosjekt/dorer-trikkestallen",
   },
   {
     label: "Vinduer",
     description: "Varesentralen Øvre Slottsgate",
-    href: "#prosjekt-vinduer-varesentralen",
+    href: "https://example.com/prosjekt/vinduer-varesentralen",
   },
   {
     label: "Spilekledning",
     description: "Bjørvika Bygg B",
-    href: "#prosjekt-spilekledning-bjorvika-bygg-b",
-  },
-  {
-    label: "Bro",
-    description: "Bolig utbygging Bryn",
-    href: "#prosjekt-bro-bryn",
-  },
-  {
-    label: "Innredning",
-    description: "Båtmonter",
-    href: "#prosjekt-innredning-batmonter",
-  },
-  {
-    label: "Fasade dekor",
-    description: "Fra gammelt til nytt",
-    href: "#prosjekt-fasade-dekor",
-  },
-  {
-    label: "Vinmonter",
-    description: "Innredning",
-    href: "#prosjekt-vinmonter",
+    href: "https://example.com/prosjekt/spilekledning-bjorvika",
   },
   {
     label: "Tannlegekontor",
     description: "Innredning",
-    href: "#prosjekt-tannlegekontor",
+    href: "https://example.com/prosjekt/tannlegekontor",
   },
 ];
 
 export default function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [projectsOpen, setProjectsOpen] = useState(false);
-  const dropdownRef = useRef(null);
+  const [scrolled, setScrolled] = useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => {
-      setIsScrolled(window.scrollY > 16);
-    };
-
+    const onScroll = () => setScrolled(window.scrollY > 16);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => {
-    const onResize = () => {
-      if (window.innerWidth > 992) {
-        setMobileOpen(false);
-      }
-    };
-
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, []);
-
-  useEffect(() => {
-    document.body.style.overflow = mobileOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [mobileOpen]);
-
-  useEffect(() => {
-    const onClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setProjectsOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", onClickOutside);
-    return () => document.removeEventListener("mousedown", onClickOutside);
-  }, []);
-
-  const closeAll = () => {
-    setMobileOpen(false);
-    setProjectsOpen(false);
-  };
+  const closeMenu = () => setExpanded(false);
 
   return (
-    <s.Header>
-      <s.NavWrap>
-        <s.NavShell $scrolled={isScrolled}>
-          <s.Brand href="/" aria-label="Spesialinteriør og Design AS">
-            <s.BrandLogo src={Logo} alt="SPID logo" />
-          </s.Brand>
+    <s.NavbarWrapper expand="lg" expanded={expanded} $scrolled={scrolled}>
+      <Container fluid="xl">
+        <BsNavbar.Brand href="/" onClick={closeMenu}>
+          <s.BrandLogo src={Logo} alt="SPID logo" />
+        </BsNavbar.Brand>
 
-          <s.DesktopNav>
-            <s.NavItem href="#tjenester">Tjenester</s.NavItem>
+        <BsNavbar.Toggle
+          aria-controls="spid-navbar"
+          onClick={() => setExpanded((prev) => !prev)}
+        >
+          <s.ToggleLines $expanded={expanded}>
+            <span />
+            <span />
+            <span />
+          </s.ToggleLines>
+        </BsNavbar.Toggle>
 
-            <s.Dropdown ref={dropdownRef}>
-              <s.DropdownTrigger
-                type="button"
-                aria-expanded={projectsOpen}
-                onClick={() => setProjectsOpen((prev) => !prev)}
-                onMouseEnter={() => setProjectsOpen(true)}
+        <BsNavbar.Collapse id="spid-navbar">
+          <s.NavMenu className="mx-auto">
+            <s.NavItem href="#tjenester" onClick={closeMenu}>
+              Tjenester
+            </s.NavItem>
+
+            <s.StyledDropdown title="Prosjekter" id="projects-dropdown">
+              {projectLinks.map((item) => (
+                <s.StyledDropdownItem
+                  key={item.href}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={closeMenu}
+                >
+                  <s.DropdownItemText>
+                    <s.DropdownItemLabel>{item.label}</s.DropdownItemLabel>
+                    <s.DropdownItemDescription>
+                      {item.description}
+                    </s.DropdownItemDescription>
+                  </s.DropdownItemText>
+                </s.StyledDropdownItem>
+              ))}
+
+              <NavDropdown.Divider />
+
+              <s.StyledDropdownItem
+                href="https://example.com/prosjekter"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={closeMenu}
               >
-                Prosjekter
-                <s.TriggerIcon $open={projectsOpen}>
-                  <ChevronDown size={16} />
-                </s.TriggerIcon>
-              </s.DropdownTrigger>
+                <s.DropdownItemText>
+                  <s.DropdownItemLabel>Se alle prosjekter</s.DropdownItemLabel>
+                  <s.DropdownItemDescription>
+                    Åpne full portefølje
+                  </s.DropdownItemDescription>
+                </s.DropdownItemText>
+              </s.StyledDropdownItem>
+            </s.StyledDropdown>
 
-              <s.DropdownSurface
-                $open={projectsOpen}
-                onMouseLeave={() => setProjectsOpen(false)}
-              >
-                <s.DropdownGrid>
-                  {projectLinks.map((item) => (
-                    <s.DropdownCard key={item.label} href={item.href}>
-                      <s.DropdownTitleRow>
-                        <s.DropdownTitle>{item.label}</s.DropdownTitle>
-                        <ArrowRight size={15} />
-                      </s.DropdownTitleRow>
-                      <s.DropdownDescription>
-                        {item.description}
-                      </s.DropdownDescription>
-                    </s.DropdownCard>
-                  ))}
-                </s.DropdownGrid>
-              </s.DropdownSurface>
-            </s.Dropdown>
+            <s.NavItem href="#om-oss" onClick={closeMenu}>
+              Om oss
+            </s.NavItem>
 
-            <s.NavItem href="#om-oss">Om oss</s.NavItem>
-            <s.NavItem href="#kontakt">Kontakt</s.NavItem>
-          </s.DesktopNav>
+            <s.NavItem href="#kontakt" onClick={closeMenu}>
+              Kontakt
+            </s.NavItem>
+          </s.NavMenu>
 
-          <s.RightCluster>
+          <s.RightActions>
             <s.CtaButton href="#kontakt">
-              Start prosjekt
+              Kontakt oss
               <ArrowRight size={16} />
             </s.CtaButton>
-
-            <s.MobileToggle
-              type="button"
-              onClick={() => setMobileOpen((prev) => !prev)}
-              aria-label={mobileOpen ? "Lukk meny" : "Åpne meny"}
-              aria-expanded={mobileOpen}
-            >
-              {mobileOpen ? <X size={20} /> : <Menu size={20} />}
-            </s.MobileToggle>
-          </s.RightCluster>
-        </s.NavShell>
-      </s.NavWrap>
-
-      <s.MobileSheet $open={mobileOpen}>
-        <s.MobilePanel>
-          <s.MobileLink href="#tjenester" onClick={closeAll}>
-            Tjenester
-          </s.MobileLink>
-
-          <s.MobileDisclosure>
-            <s.MobileDisclosureButton
-              type="button"
-              onClick={() => setProjectsOpen((prev) => !prev)}
-              aria-expanded={projectsOpen}
-            >
-              Prosjekter
-              <s.TriggerIcon $open={projectsOpen}>
-                <ChevronDown size={18} />
-              </s.TriggerIcon>
-            </s.MobileDisclosureButton>
-
-            <s.MobileDisclosurePanel $open={projectsOpen}>
-              {projectLinks.map((item) => (
-                <s.MobileSubLink
-                  key={item.label}
-                  href={item.href}
-                  onClick={closeAll}
-                >
-                  <span>{item.label}</span>
-                  <small>{item.description}</small>
-                </s.MobileSubLink>
-              ))}
-            </s.MobileDisclosurePanel>
-          </s.MobileDisclosure>
-
-          <s.MobileLink href="#om-oss" onClick={closeAll}>
-            Om oss
-          </s.MobileLink>
-
-          <s.MobileLink href="#kontakt" onClick={closeAll}>
-            Kontakt
-          </s.MobileLink>
-
-          <s.MobileCta href="#kontakt" onClick={closeAll}>
-            Start prosjekt
-            <ArrowRight size={16} />
-          </s.MobileCta>
-        </s.MobilePanel>
-      </s.MobileSheet>
-    </s.Header>
+          </s.RightActions>
+        </BsNavbar.Collapse>
+      </Container>
+    </s.NavbarWrapper>
   );
 }

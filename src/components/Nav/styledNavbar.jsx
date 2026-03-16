@@ -1,582 +1,301 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+import NavDropdown from "react-bootstrap/NavDropdown";
 
-export const Header = styled.header`
-  position: sticky;
+export const NavbarWrapper = styled(Navbar)`
+  position: fixed;
   top: 0;
-  z-index: 1200;
-  pointer-events: none;
-`;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 1rem 1.5rem;
+  transition: all 0.3s ease;
 
-export const NavWrap = styled.div`
-  margin: 0 auto;
-  pointer-events: auto;
-`;
+  background: ${({ $scrolled }) =>
+    $scrolled ? "rgba(244, 240, 234, 0.82)" : "rgba(244, 240, 234, 0.42)"};
 
-export const NavShell = styled.div`
-  position: relative;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: 1.25rem;
-  min-height: 78px;
-  padding: 0.75rem 0.9rem 0.75rem 1rem;
-  transition:
-    background 0.25s ease,
-    border-color 0.25s ease,
-    box-shadow 0.25s ease,
-    backdrop-filter 0.25s ease;
+  border-bottom: 1px solid
+    ${({ $scrolled }) =>
+      $scrolled ? "rgba(255,255,255,0.72)" : "rgba(255,255,255,0.38)"};
 
-  ${({ $scrolled }) =>
+  backdrop-filter: blur(${({ $scrolled }) => ($scrolled ? "18px" : "10px")})
+    saturate(140%);
+  -webkit-backdrop-filter: blur(
+      ${({ $scrolled }) => ($scrolled ? "18px" : "10px")}
+    )
+    saturate(140%);
+
+  box-shadow: ${({ $scrolled }) =>
     $scrolled
-      ? css`
-          background: rgba(255, 255, 255, 0.62);
-          border: 1px solid rgba(255, 255, 255, 0.84);
-          box-shadow:
-            0 18px 48px rgba(18, 18, 18, 0.08),
-            0 0 0 1px rgba(255, 255, 255, 0.16),
-            0 0 40px rgba(213, 31, 38, 0.08),
-            0 1px 0 rgba(255, 255, 255, 0.7) inset;
-          backdrop-filter: blur(22px) saturate(145%);
-          -webkit-backdrop-filter: blur(22px) saturate(145%);
-        `
-      : css`
-          background: rgba(255, 255, 255, 0.42);
-          border: 1px solid rgba(255, 255, 255, 0.62);
-          box-shadow:
-            0 10px 30px rgba(18, 18, 18, 0.045),
-            0 0 30px rgba(213, 31, 38, 0.05),
-            0 1px 0 rgba(255, 255, 255, 0.62) inset;
-          backdrop-filter: blur(16px) saturate(130%);
-          -webkit-backdrop-filter: blur(16px) saturate(130%);
-        `}
+      ? "0 12px 32px rgba(18, 18, 18, 0.08), 0 0 24px rgba(213, 31, 38, 0.05)"
+      : "none"};
 
-  @media (max-width: 992px) {
-    grid-template-columns: auto auto;
-    min-height: 70px;
-    padding: 0.65rem 0.75rem 0.65rem 0.9rem;
-    border-radius: 22px;
+  .navbar-brand {
+    display: inline-flex;
+    align-items: center;
+    padding: 0;
+    margin-right: 1rem;
+  }
+
+  .navbar-collapse {
+    justify-content: space-between;
+  }
+
+  .navbar-toggler {
+    border: none;
+    padding: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition:
+      transform 0.22s ease,
+      background 0.22s ease,
+      box-shadow 0.22s ease;
+    margin-left: auto;
+  }
+
+  .navbar-toggler:hover {
+    transform: translateY(-1px);
+  }
+
+  .navbar-toggler:focus {
+    outline: none;
+  }
+
+  @media (max-width: 991.98px) {
+    padding: 0.9rem 1rem;
+
+    .navbar-toggler {
+      display: inline-flex;
+    }
+
+    .navbar-collapse {
+      padding: 0.8rem;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .navbar-toggler {
+      display: none;
+    }
   }
 `;
 
-export const Brand = styled.a`
-  display: inline-flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-shrink: 0;
-`;
-
 export const BrandLogo = styled.img`
-  height: 38px;
+  height: 36px;
   width: auto;
   object-fit: contain;
 
   @media (max-width: 576px) {
-    height: 34px;
+    height: 32px;
   }
 `;
 
-export const DesktopNav = styled.nav`
-  justify-self: center;
-  display: inline-flex;
+export const NavMenu = styled(Nav)`
   align-items: center;
-  gap: 0.25rem;
-  padding: 0.25rem;
+  gap: 0.45rem;
 
-  @media (max-width: 992px) {
-    display: none;
+  @media (max-width: 991.98px) {
+    align-items: stretch;
+    gap: 0.45rem;
+    margin-top: 0.25rem;
   }
 `;
 
 export const NavItem = styled.a`
   position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 44px;
-  padding: 0.8rem 1rem;
-  border-radius: 999px;
-  color: #161616;
-  font-size: 0.95rem;
+  color: rgba(23, 23, 23, 0.78);
+  text-decoration: none;
   font-weight: 600;
-  letter-spacing: -0.01em;
-  transition:
-    background 0.22s ease,
-    color 0.22s ease,
-    transform 0.22s ease,
-    box-shadow 0.22s ease;
+  font-size: 0.97rem;
+  padding: 0.8rem 1rem;
+  border-radius: 14px;
+  transition: all 0.22s ease;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.9);
-    color: #111111;
-    box-shadow:
-      0 10px 24px rgba(25, 25, 25, 0.06),
-      0 0 20px rgba(213, 31, 38, 0.05),
-      0 1px 0 rgba(255, 255, 255, 0.78) inset;
-    transform: translateY(-1px);
+    color: #171717;
+    background: rgba(255, 255, 255, 0.62);
   }
 
-  &.active,
-  &[aria-current="page"] {
-    background: rgba(255, 255, 255, 0.96);
-    color: #111111;
-    box-shadow:
-      0 10px 28px rgba(25, 25, 25, 0.08),
-      0 0 24px rgba(213, 31, 38, 0.06),
-      0 1px 0 rgba(255, 255, 255, 0.82) inset;
+  @media (max-width: 991.98px) {
+    width: 100%;
   }
 `;
 
-export const Dropdown = styled.div`
-  position: relative;
+export const StyledDropdown = styled(NavDropdown)`
+  .nav-link {
+    color: rgba(23, 23, 23, 0.78) !important;
+    font-weight: 600;
+    font-size: 0.97rem;
+    padding: 0.8rem 1rem !important;
+    border-radius: 14px;
+    transition: all 0.22s ease;
+  }
+
+  .nav-link:hover,
+  .nav-link:focus,
+  &.show .nav-link {
+    color: #171717 !important;
+    background: rgba(255, 255, 255, 0.62);
+  }
+
+  .dropdown-menu {
+    min-width: 320px;
+    padding: 0.55rem;
+    border-radius: 22px;
+    border: 1px solid rgba(255, 255, 255, 0.88);
+    background: rgba(255, 255, 255, 0.82);
+    box-shadow:
+      0 18px 36px rgba(18, 18, 18, 0.08),
+      0 0 24px rgba(213, 31, 38, 0.05),
+      0 1px 0 rgba(255, 255, 255, 0.72) inset;
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+
+  .dropdown-divider {
+    margin: 0.4rem 0;
+    border-color: rgba(23, 23, 23, 0.08);
+  }
+
+  @media (max-width: 991.98px) {
+    width: 100%;
+
+    .nav-link {
+      width: 100%;
+    }
+
+    .dropdown-menu {
+      min-width: unset;
+      width: 100%;
+      margin-top: 0.35rem;
+      box-shadow: none;
+      background: rgba(255, 255, 255, 0.58);
+    }
+  }
 `;
 
-export const DropdownTrigger = styled.button`
-  border: 0;
-  outline: 0;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  min-height: 44px;
-  padding: 0.8rem 1rem;
-  border-radius: 999px;
-  background: transparent;
-  color: #161616;
-  font-size: 0.95rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
+export const StyledDropdownItem = styled(NavDropdown.Item)`
+  display: block;
+  padding: 0.8rem 0.9rem;
+  border-radius: 16px;
   transition:
     background 0.22s ease,
-    color 0.22s ease,
-    transform 0.22s ease,
-    box-shadow 0.22s ease;
+    transform 0.22s ease;
 
   &:hover,
-  &[aria-expanded="true"] {
-    background: rgba(255, 255, 255, 0.9);
-    color: #111111;
-    box-shadow:
-      0 10px 24px rgba(25, 25, 25, 0.06),
-      0 0 20px rgba(213, 31, 38, 0.05),
-      0 1px 0 rgba(255, 255, 255, 0.78) inset;
-    transform: translateY(-1px);
+  &:focus {
+    background: rgba(255, 255, 255, 0.86);
+    transform: translateX(2px);
+  }
+
+  &:active {
+    background: rgba(255, 255, 255, 0.92);
   }
 `;
 
-export const TriggerIcon = styled.span`
-  display: inline-flex;
-  transition: transform 0.24s ease;
-  transform: ${({ $open }) => ($open ? "rotate(180deg)" : "rotate(0deg)")};
-`;
-
-export const DropdownSurface = styled.div`
-  position: absolute;
-  top: calc(100% + 0.9rem);
-  left: 50%;
-  transform: ${({ $open }) =>
-    $open
-      ? "translateX(-50%) translateY(0)"
-      : "translateX(-50%) translateY(10px)"};
-  width: 560px;
-  padding: 0.7rem;
-  border-radius: 28px;
-  background: rgba(255, 255, 255, 0.76);
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  box-shadow:
-    0 22px 60px rgba(18, 18, 18, 0.1),
-    0 0 40px rgba(213, 31, 38, 0.08),
-    0 1px 0 rgba(255, 255, 255, 0.65) inset;
-  backdrop-filter: blur(24px) saturate(145%);
-  -webkit-backdrop-filter: blur(24px) saturate(145%);
-  opacity: ${({ $open }) => ($open ? 1 : 0)};
-  visibility: ${({ $open }) => ($open ? "visible" : "hidden")};
-  pointer-events: ${({ $open }) => ($open ? "auto" : "none")};
-  transition:
-    opacity 0.22s ease,
-    transform 0.22s ease,
-    visibility 0.22s ease;
-
-  @media (max-width: 1200px) {
-    width: 500px;
-  }
-`;
-
-export const DropdownGrid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.65rem;
-`;
-
-export const DropdownCard = styled.a`
+export const DropdownItemText = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.45rem;
-  min-height: 112px;
-  padding: 1rem;
-  border-radius: 22px;
-  background: rgba(255, 255, 255, 0.46);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  transition:
-    transform 0.22s ease,
-    background 0.22s ease,
-    border-color 0.22s ease,
-    box-shadow 0.22s ease,
-    color 0.22s ease;
-
-  &:hover {
-    transform: translateY(-2px);
-    background: rgba(255, 255, 255, 0.84);
-    border-color: rgba(255, 255, 255, 0.92);
-    box-shadow:
-      0 14px 32px rgba(20, 20, 20, 0.06),
-      0 0 24px rgba(213, 31, 38, 0.05),
-      0 1px 0 rgba(255, 255, 255, 0.65) inset;
-  }
-
-  &:hover svg {
-    transform: translateX(2px);
-    color: #d51f26;
-  }
+  gap: 0.18rem;
 `;
 
-export const DropdownTitleRow = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  svg {
-    color: #7b7670;
-    transition:
-      transform 0.22s ease,
-      color 0.22s ease;
-  }
-`;
-
-export const DropdownTitle = styled.div`
-  font-size: 0.98rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+export const DropdownItemLabel = styled.div`
   color: #171717;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
 `;
 
-export const DropdownDescription = styled.p`
-  margin: 0;
-  max-width: 26ch;
-  font-size: 0.9rem;
-  line-height: 1.55;
-  color: #66615c;
+export const DropdownItemDescription = styled.div`
+  color: #6a645e;
+  font-size: 0.84rem;
+  line-height: 1.45;
 `;
 
-export const RightCluster = styled.div`
+export const ToggleLines = styled.div`
+  position: relative;
+  width: 22px;
+  height: 16px;
+
+  span {
+    position: absolute;
+    left: 0;
+    width: 20px;
+    height: 2px;
+    border-radius: 999px;
+    background: #171717;
+    transition:
+      transform 0.28s ease,
+      top 0.28s ease,
+      opacity 0.2s ease,
+      width 0.28s ease;
+    transform-origin: center;
+  }
+
+  span:nth-child(1) {
+    top: ${({ $expanded }) => ($expanded ? "6px" : "0px")};
+    transform: ${({ $expanded }) =>
+      $expanded ? "rotate(45deg)" : "rotate(0)"};
+  }
+
+  span:nth-child(2) {
+    top: 6px;
+    opacity: ${({ $expanded }) => ($expanded ? 0 : 1)};
+    transform: ${({ $expanded }) => ($expanded ? "scaleX(0.4)" : "scaleX(1)")};
+  }
+
+  span:nth-child(3) {
+    top: ${({ $expanded }) => ($expanded ? "6px" : "12px")};
+    transform: ${({ $expanded }) =>
+      $expanded ? "rotate(-45deg)" : "rotate(0)"};
+  }
+`;
+
+export const RightActions = styled.div`
   display: flex;
   align-items: center;
   gap: 0.65rem;
-`;
 
-export const CtaButton = styled.a`
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  min-height: 46px;
-  padding: 0.9rem 1.05rem;
-  border-radius: 999px;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.96) 0%,
-    rgba(248, 248, 248, 0.9) 100%
-  );
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  color: #151515;
-  font-size: 0.94rem;
-  font-weight: 700;
-  letter-spacing: -0.015em;
-  box-shadow:
-    0 10px 30px rgba(18, 18, 18, 0.08),
-    0 0 24px rgba(213, 31, 38, 0.06),
-    0 1px 0 rgba(255, 255, 255, 0.72) inset;
-  transition:
-    transform 0.22s ease,
-    box-shadow 0.22s ease,
-    color 0.22s ease;
-
-  &::after {
-    content: "";
-    position: absolute;
-    inset: -1px;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(
-      135deg,
-      rgba(213, 31, 38, 0.35),
-      rgba(255, 255, 255, 0.2),
-      rgba(213, 31, 38, 0.18)
-    );
-    -webkit-mask:
-      linear-gradient(#fff 0 0) content-box,
-      linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
-  }
-
-  &:hover {
-    transform: translateY(-2px);
-    color: #d51f26;
-    box-shadow:
-      0 16px 42px rgba(18, 18, 18, 0.1),
-      0 0 28px rgba(213, 31, 38, 0.08),
-      0 1px 0 rgba(255, 255, 255, 0.8) inset;
-  }
-
-  @media (max-width: 992px) {
+  @media (max-width: 991.98px) {
     display: none;
   }
 `;
 
-export const MobileToggle = styled.button`
-  display: none;
-  width: 46px;
-  height: 46px;
-  border: 0;
-  outline: 0;
-  cursor: pointer;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.82);
-  border: 1px solid rgba(255, 255, 255, 0.92);
-  color: #181818;
-  box-shadow:
-    0 10px 24px rgba(20, 20, 20, 0.07),
-    0 0 20px rgba(213, 31, 38, 0.05),
-    0 1px 0 rgba(255, 255, 255, 0.72) inset;
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  transition:
-    transform 0.22s ease,
-    background 0.22s ease,
-    box-shadow 0.22s ease;
-
-  svg {
-    width: 19px;
-    height: 19px;
-    transform: translateY(0.5px);
-  }
-
-  &:hover,
-  &:active,
-  &[aria-expanded="true"] {
-    transform: translateY(-1px);
-    background: rgba(255, 255, 255, 0.94);
-    box-shadow:
-      0 14px 30px rgba(20, 20, 20, 0.1),
-      0 0 24px rgba(213, 31, 38, 0.06),
-      0 1px 0 rgba(255, 255, 255, 0.8) inset;
-  }
-
-  @media (max-width: 992px) {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-`;
-
-export const MobileSheet = styled.div`
-  display: none;
-
-  @media (max-width: 992px) {
-    display: block;
-    width: min(1320px, calc(100% - 2rem));
-    margin: 0.75rem auto 0;
-    max-height: ${({ $open }) => ($open ? "85vh" : "0")};
-    opacity: ${({ $open }) => ($open ? 1 : 0)};
-    overflow: hidden;
-    transition:
-      max-height 0.28s ease,
-      opacity 0.24s ease;
-  }
-`;
-
-export const MobilePanel = styled.div`
-  padding: 0.8rem;
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.82);
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  box-shadow:
-    0 20px 55px rgba(18, 18, 18, 0.08),
-    0 0 32px rgba(213, 31, 38, 0.07),
-    0 1px 0 rgba(255, 255, 255, 0.7) inset;
-  backdrop-filter: blur(22px) saturate(135%);
-  -webkit-backdrop-filter: blur(22px) saturate(135%);
-`;
-
-export const MobileLink = styled.a`
-  display: flex;
-  align-items: center;
-  min-height: 54px;
-  padding: 0.95rem 1rem;
-  border-radius: 18px;
-  color: #171717;
-  font-size: 1rem;
-  font-weight: 650;
-  letter-spacing: -0.015em;
-  transition:
-    background 0.22s ease,
-    color 0.22s ease,
-    box-shadow 0.22s ease,
-    transform 0.22s ease;
-
-  &:hover,
-  &:active {
-    background: rgba(255, 255, 255, 0.9);
-    color: #111111;
-    box-shadow:
-      0 8px 20px rgba(20, 20, 20, 0.05),
-      0 0 18px rgba(213, 31, 38, 0.04),
-      0 1px 0 rgba(255, 255, 255, 0.7) inset;
-    transform: translateX(1px);
-  }
-
-  &.active {
-    background: rgba(255, 255, 255, 0.96);
-    color: #111111;
-    box-shadow:
-      0 10px 24px rgba(20, 20, 20, 0.06),
-      0 0 20px rgba(213, 31, 38, 0.05),
-      0 1px 0 rgba(255, 255, 255, 0.78) inset;
-  }
-`;
-
-export const MobileDisclosure = styled.div`
-  margin: 0.1rem 0;
-`;
-
-export const MobileDisclosureButton = styled.button`
-  width: 100%;
-  border: 0;
-  outline: 0;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 54px;
-  padding: 0.95rem 1rem;
-  border-radius: 18px;
-  background: transparent;
-  color: #171717;
-  font-size: 1rem;
-  font-weight: 650;
-  letter-spacing: -0.015em;
-  transition:
-    background 0.22s ease,
-    color 0.22s ease,
-    box-shadow 0.22s ease,
-    transform 0.22s ease;
-
-  &:hover,
-  &:active,
-  &[aria-expanded="true"] {
-    background: rgba(255, 255, 255, 0.9);
-    color: #111111;
-    box-shadow:
-      0 8px 20px rgba(20, 20, 20, 0.05),
-      0 0 18px rgba(213, 31, 38, 0.04),
-      0 1px 0 rgba(255, 255, 255, 0.7) inset;
-  }
-`;
-
-export const MobileDisclosurePanel = styled.div`
-  max-height: ${({ $open }) => ($open ? "420px" : "0")};
-  overflow: hidden;
-  transition: max-height 0.28s ease;
-`;
-
-export const MobileSubLink = styled.a`
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-  margin: 0.35rem 0 0.35rem 0.75rem;
-  padding: 0.9rem 1rem;
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.54);
-  border: 1px solid rgba(255, 255, 255, 0.64);
-  transition:
-    transform 0.22s ease,
-    background 0.22s ease,
-    color 0.22s ease,
-    box-shadow 0.22s ease;
-
-  span {
-    color: #1a1a1a;
-    font-size: 0.96rem;
-    font-weight: 700;
-    letter-spacing: -0.015em;
-  }
-
-  small {
-    color: #6b655f;
-    font-size: 0.84rem;
-    line-height: 1.45;
-  }
-
-  &:hover,
-  &:active {
-    transform: translateX(2px);
-    background: rgba(255, 255, 255, 0.86);
-    box-shadow:
-      0 8px 20px rgba(20, 20, 20, 0.05),
-      0 0 18px rgba(213, 31, 38, 0.04),
-      0 1px 0 rgba(255, 255, 255, 0.72) inset;
-
-    span {
-      color: #111111;
-    }
-  }
-
-  &.active {
-    background: rgba(255, 255, 255, 0.94);
-    box-shadow:
-      0 10px 24px rgba(20, 20, 20, 0.06),
-      0 0 20px rgba(213, 31, 38, 0.05),
-      0 1px 0 rgba(255, 255, 255, 0.78) inset;
-  }
-`;
-
-export const MobileCta = styled.a`
-  margin-top: 0.8rem;
-  width: 100%;
-  min-height: 52px;
+export const CtaButton = styled.a`
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   gap: 0.5rem;
-  padding: 1rem 1.1rem;
+  min-height: 44px;
+  padding: 0.85rem 1rem;
   border-radius: 999px;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.98) 0%,
-    rgba(246, 246, 246, 0.94) 100%
-  );
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  color: #151515;
-  font-size: 0.95rem;
+  text-decoration: none;
+  color: #171717;
   font-weight: 700;
+  font-size: 0.94rem;
   letter-spacing: -0.015em;
+  background: rgba(255, 255, 255, 0.74);
+  border: 1px solid rgba(255, 255, 255, 0.88);
   box-shadow:
-    0 12px 30px rgba(18, 18, 18, 0.08),
-    0 0 20px rgba(213, 31, 38, 0.05),
-    0 1px 0 rgba(255, 255, 255, 0.7) inset;
+    0 10px 24px rgba(18, 18, 18, 0.06),
+    0 0 18px rgba(213, 31, 38, 0.04),
+    0 1px 0 rgba(255, 255, 255, 0.72) inset;
   transition:
     transform 0.22s ease,
     box-shadow 0.22s ease,
     color 0.22s ease;
 
   &:hover {
-    transform: translateY(-2px);
+    transform: translateY(-1px);
     color: #d51f26;
     box-shadow:
-      0 16px 38px rgba(18, 18, 18, 0.1),
-      0 0 24px rgba(213, 31, 38, 0.06),
-      0 1px 0 rgba(255, 255, 255, 0.78) inset;
+      0 14px 28px rgba(18, 18, 18, 0.08),
+      0 0 20px rgba(213, 31, 38, 0.06),
+      0 1px 0 rgba(255, 255, 255, 0.76) inset;
   }
 `;

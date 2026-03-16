@@ -135,10 +135,6 @@ export default function ServicesSection() {
 
               <s.CardTop>
                 <s.IconWrap>{item.icon}</s.IconWrap>
-
-                <s.CardArrow>
-                  <ArrowUpRight size={16} />
-                </s.CardArrow>
               </s.CardTop>
 
               <s.ServiceTitle>{item.title}</s.ServiceTitle>
@@ -187,10 +183,6 @@ export default function ServicesSection() {
 
                   <s.SpecialtyTitleWrap>
                     <s.SpecialtyTitle>{item.title}</s.SpecialtyTitle>
-
-                    <s.SpecialtyArrow>
-                      <ArrowUpRight size={16} />
-                    </s.SpecialtyArrow>
                   </s.SpecialtyTitleWrap>
                 </s.SpecialtyTop>
 
