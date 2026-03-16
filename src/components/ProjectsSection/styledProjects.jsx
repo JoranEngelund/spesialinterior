@@ -243,7 +243,7 @@ export const CardBottom = styled.div`
 
 export const ProjectTitle = styled.h3`
   margin: 0;
-  font-size: clamp(1rem, 1.5vw, 1.18rem);
+  font-size: clamp(0.9rem, 1.4vw, 1rem);
   line-height: 1.25;
   font-weight: 700;
   letter-spacing: -0.025em;

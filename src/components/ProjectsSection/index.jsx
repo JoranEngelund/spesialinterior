@@ -25,7 +25,9 @@ const fadeUp = {
   }),
 };
 
-const featuredProjects = [
+const featuredProjects = [];
+
+const projects = [
   {
     id: "prosjekt-fasade-bjorvika",
     image: prosjektFasade,
@@ -40,9 +42,6 @@ const featuredProjects = [
     title: "Trikkestallen Torshov nye dører",
     position: "center center",
   },
-];
-
-const projects = [
   {
     id: "prosjekt-vinduer-varesentralen",
     image: prosjektVinduer,
@@ -136,38 +135,6 @@ export default function ProjectsSection() {
           </s.Text>
         </s.Intro>
 
-        <s.FeaturedGrid>
-          {featuredProjects.map((project, index) => (
-            <s.FeaturedCard
-              id={project.id}
-              as={motion.article}
-              key={project.id}
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.15 }}
-              custom={0.04 + index * 0.06}
-            >
-              <s.ImageWrap>
-                <s.Image
-                  src={project.image}
-                  alt={project.title}
-                  $position={project.position}
-                />
-                <s.ImageOverlay />
-
-                <s.CardTop>
-                  <s.CategoryPill>{project.category}</s.CategoryPill>
-                </s.CardTop>
-
-                <s.CardBottom>
-                  <s.ProjectTitle>{project.title}</s.ProjectTitle>
-                </s.CardBottom>
-              </s.ImageWrap>
-            </s.FeaturedCard>
-          ))}
-        </s.FeaturedGrid>
-
         <s.Grid>
           {projects.map((project, index) => (
             <s.ProjectCard
@@ -187,10 +154,6 @@ export default function ProjectsSection() {
                   $position={project.position}
                 />
                 <s.ImageOverlay />
-
-                <s.CardTop>
-                  <s.CategoryPill>{project.category}</s.CategoryPill>
-                </s.CardTop>
 
                 <s.CardBottom>
                   <s.ProjectTitle>{project.title}</s.ProjectTitle>
